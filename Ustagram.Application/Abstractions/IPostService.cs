@@ -10,4 +10,10 @@ public interface IPostService
     public Task<string> UpdatePost(Guid postId, PostDTO postDto);
     public Task<string> DeletePost(Guid postId);
     public Task<List<Post>> GetAllPosts();
+    public Task<List<Post>> GetPostsLastFive();
+    public Task<List<Post>> GetPostsTopFive();
+    public Task<List<Post>> GetPostsIshCategory();
+    public Task<List<Post>> GetPostsSotuvCategory();
+    public Task<List<Post>> GetPostsReklamaCategory();
+
 }

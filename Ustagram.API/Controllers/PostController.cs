@@ -61,4 +61,42 @@ public class PostController : ControllerBase
         var result = await _service.GetAllPosts();
         return Ok(result);
     }
+    
+    
+    [HttpGet]
+    public async Task<ActionResult<Post>> GetPostsLastFive()
+    {
+        var result = await _service.GetPostsLastFive();
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<Post>> GetPostsTopFive()
+    {
+        var result = await _service.GetPostsTopFive();
+        return Ok(result);
+    }
+    
+    
+    [HttpGet]
+    public async Task<ActionResult<Post>> GetPostsIshCategory()
+    {
+        var result = await _service.GetPostsIshCategory();
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<Post>> GetPostsSotuvCategory()
+    {
+        var result = await _service.GetPostsSotuvCategory();
+        return Ok(result);
+    }
+    
+    
+    [HttpGet]
+    public async Task<ActionResult<Post>> GetPostsReklamaCategory()
+    {
+        var result = await _service.GetPostsReklamaCategory();
+        return Ok(result);
+    }
 }

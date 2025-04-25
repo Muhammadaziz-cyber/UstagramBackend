@@ -8,7 +8,7 @@ public class Post
     public string Description { get; set; }
     public int Price { get; set; }
     public string PhotoPath { get; set; }
-    public string Date { get; set; }
+    public string Date { get; set; } 
     public int Likes { get; set; }
     public int Dislikes { get; set; }
     

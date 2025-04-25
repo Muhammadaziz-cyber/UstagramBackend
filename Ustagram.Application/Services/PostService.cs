@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 using Ustagram.Application.Abstractions;
 using Ustagram.Domain.DTOs;
 using Ustagram.Domain.Model;
@@ -65,7 +66,43 @@ public class PostService : IPostService
 
     public async Task<List<Post>> GetAllPosts()
     {
-        var posts = await _db.Posts.Include(p => p.Comments).ToListAsync();
+        var posts = await _db.Posts.Include(p => p.User).Include(p => p.Comments).ToListAsync();
         return posts;
     }
+    public async Task<List<Post>> GetPostsLastFive()
+    {
+        var posts = (await _db.Posts
+                .Include(p => p.Comments)
+                .ToListAsync())
+            .OrderByDescending(p => DateTime.ParseExact(p.Date, "dd.MM.yyyy", CultureInfo.InvariantCulture))
+            .Take(5)
+            .ToList();
+        return posts;
+    }
+
+    public async Task<List<Post>> GetPostsTopFive()
+    {
+        var posts = await _db.Posts.Include(p => p.User).Include(p => p.Comments).OrderByDescending(p=>p.Likes).Take(5).ToListAsync();
+        return posts;
+    }
+
+    public async Task<List<Post>> GetPostsIshCategory()
+    {
+        var posts = await _db.Posts.Include(p => p.User).Include(p => p.Comments).Where(p=> p.PostType== "Ish").Take(5).ToListAsync();
+        return posts;
+    }
+
+    public async Task<List<Post>> GetPostsSotuvCategory()
+    {
+        var posts = await _db.Posts.Include(p => p.User).Include(p => p.Comments).Where(p=> p.PostType== "Sotuv").Take(5).ToListAsync();
+        return posts;
+    }
+
+    public async Task<List<Post>> GetPostsReklamaCategory()
+    {
+        var posts = await _db.Posts.Include(p => p.User).Include(p => p.Comments).Where(p=> p.PostType== "Reklama").Take(5).ToListAsync();
+        return posts;
+    }
+
+    
 }
